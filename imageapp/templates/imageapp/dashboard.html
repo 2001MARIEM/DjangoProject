@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,39 +9,67 @@
     <style>
         body {
             background-color: #f8f9fa;
+            margin: 0; 
+            padding: 0; 
+            font-family: Arial, sans-serif;
+        }
+        .dashboard-header {
+            background-color: #ffffff; 
+            padding: 20px 20px 10px 20px; 
+            
+        }
+        .dashboard-title {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 0; /* Supprime les marges par défaut */
+            color: #343a40;
         }
         .container {
-            margin-top: 50px;
+            margin-top: 50px; /* Ajuste la marge supérieure pour espacer du header */
         }
         .card {
             border: none;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
         }
-        .card-img-top {
-            text-align: center;
+        .card-img-bottom {
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            width: 100%;
+            height: auto;
         }
         .card-body {
-           
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
+            text-align: center;
+            background-color: #ffffff; /* Optionnel : Ajoute un fond blanc pour le texte */
         }
         .card-title {
             font-size: 1.5rem;
             font-weight: bold;
+            margin-bottom: 10px;
+            color: #343a40;
+        }
+        .card-text {
+            color: #6c757d;
         }
     </style>
 </head>
 <body>
+    <!-- Header avec le mot "Dashboard" aligné à gauche -->
+    <div class="dashboard-header">
+        <h4 class="dashboard-title">Dashboard</h4>
+    </div>
+
+    <!-- Contenu principal dans une container Bootstrap -->
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card">
-                    <img src="{% url 'serve_image' image_id %}" class="card-img-top" alt="{{ image_filename }}">
                     <div class="card-body">
                         <h5 class="card-title">Dernière Image Reçue</h5>
                         <p class="card-text">Voici l'image la plus récente envoyée par le système embarqué.</p>
                     </div>
+                    <img src="{% url 'serve_image' image_id %}" class="card-img-bottom" alt="{{ image_filename }}">
                 </div>
             </div>
         </div>
@@ -53,4 +81,3 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-
