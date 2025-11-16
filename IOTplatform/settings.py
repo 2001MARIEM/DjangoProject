@@ -1,4 +1,3 @@
-
 import os
 from mongoengine import connect
 
@@ -19,6 +18,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'imageapp',
+    'authentification',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +50,23 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'IOTplatform.wsgi.application'
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+
+
+
+
+
+
+
+
+
 
 # MongoDB settings
 connect('imagedatabase', host='localhost', port=27017)
@@ -83,3 +100,5 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+

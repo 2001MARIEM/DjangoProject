@@ -5,6 +5,8 @@ from django.views.decorators.csrf import csrf_exempt
 from pymongo import MongoClient
 import gridfs
 from bson import ObjectId
+from django.contrib.auth.decorators import login_required
+from authentification.views import login_required_custom
 
 # Connexion à MongoDB
 client = MongoClient('localhost', 27017)
@@ -12,7 +14,8 @@ db = client['imagedatabase']
 fs = gridfs.GridFS(db)
 
 def home(request):
-    return HttpResponse('Hello')
+    return HttpResponse('Hello!')
+
 
 @csrf_exempt
 def upload_image(request):
@@ -43,6 +46,10 @@ def serve_image(request, file_id):
         return HttpResponse(status=500)
   
 
+@login_required_custom
 def dashboard(request):
     latest_image = fs.find().sort("uploadDate", -1).limit(1)[0]
-    return render(request, 'imageapp/dashboard.html', {'image_id': str(latest_image._id), 'image_filename': latest_image.filename})
+    return render(request, 'imageapp/dashboard.html', {
+        'image_id': str(latest_image._id),
+        'image_filename': latest_image.filename
+    })

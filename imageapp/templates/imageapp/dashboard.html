@@ -1,83 +1,128 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Dashboard</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Dashboard - Image</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <style>
         body {
-            background-color: #f8f9fa;
-            margin: 0; 
-            padding: 0; 
-            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            /* Couleur claire neutre */
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            color: #333;
         }
+
+        /* HEADER */
         .dashboard-header {
-            background-color: #ffffff; 
-            padding: 20px 20px 10px 20px; 
-            
+            background: white;
+            padding: 18px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e4e6eb;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         }
+
         .dashboard-title {
-            font-size: 2rem;
-            font-weight: bold;
-            margin: 0; /* Supprime les marges par défaut */
-            color: #343a40;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #333;
         }
-        .container {
-            margin-top: 50px; /* Ajuste la marge supérieure pour espacer du header */
-        }
-        .card {
+
+        .logout-btn {
+            background: #4c6ef5;
             border: none;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 8px 20px;
+            border-radius: 6px;
+            color: #fff;
+            font-weight: 500;
+        }
+
+        .logout-btn:hover {
+            background: #3b5bdb;
+        }
+
+        /* CARD */
+        .image-card {
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
             overflow: hidden;
+            animation: fadeIn 0.6s ease;
         }
-        .card-img-bottom {
-            border-bottom-left-radius: 10px;
-            border-bottom-right-radius: 10px;
-            width: 100%;
-            height: auto;
-        }
+
         .card-body {
+            padding: 25px;
             text-align: center;
-            background-color: #ffffff; /* Optionnel : Ajoute un fond blanc pour le texte */
         }
+
         .card-title {
             font-size: 1.5rem;
             font-weight: bold;
-            margin-bottom: 10px;
-            color: #343a40;
+            color: #222;
         }
+
         .card-text {
             color: #6c757d;
         }
+
+        .card-img-bottom {
+            width: 100%;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+        }
+
+        /* ANIMATION */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
+
 <body>
-    <!-- Header avec le mot "Dashboard" aligné à gauche -->
+
+    <!-- Header -->
     <div class="dashboard-header">
-        <h4 class="dashboard-title">Dashboard</h4>
+        <h4 class="dashboard-title">Dashboard - Dernière Image</h4>
+
+        <a href="{% url 'logout' %}" class="btn logout-btn">
+            Déconnexion
+        </a>
     </div>
 
-    <!-- Contenu principal dans une container Bootstrap -->
-    <div class="container">
+    <!-- Content -->
+    <div class="container mt-5">
         <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card">
+            <div class="col-md-7 col-lg-6">
+                <div class="image-card card">
+
                     <div class="card-body">
                         <h5 class="card-title">Dernière Image Reçue</h5>
                         <p class="card-text">Voici l'image la plus récente envoyée par le système embarqué.</p>
                     </div>
+
                     <img src="{% url 'serve_image' image_id %}" class="card-img-bottom" alt="{{ image_filename }}">
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Bootstrap JS and dependencies -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>
